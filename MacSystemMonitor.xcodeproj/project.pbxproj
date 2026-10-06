@@ -109,6 +109,21 @@
 		FE4CA5C2E606B4D70FF6B196 /* BatteryCalibrationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */; };
 		FEE54D88CC63B729743DE411 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D7A9F13F7E9CF7101CB7B /* BatteryService.swift */; };
 		FF32BE67A493377EC3C2E8A8 /* BatteryCalibrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */; };
+		E5B527A1F477EF71D80924FE /* SailingModeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2620D96A09DC4C0944A9984 /* SailingModeModel.swift */; };
+		CA6BEE10C8D37B3A7F848D80 /* SailingModeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2620D96A09DC4C0944A9984 /* SailingModeModel.swift */; };
+		428EA2FE54D4C822A104898C /* HysteresisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2FA8EFCC38F288AC84B44 /* HysteresisController.swift */; };
+		41FBCAF3FDCB0D786BFD6AB1 /* HysteresisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2FA8EFCC38F288AC84B44 /* HysteresisController.swift */; };
+		27FE72051E3A4D41D9F56242 /* ChargeControlBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19651559D0A49DE2EDAD67B /* ChargeControlBackend.swift */; };
+		859F1810A4A12CDB0AA87753 /* ChargeControlBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19651559D0A49DE2EDAD67B /* ChargeControlBackend.swift */; };
+		33093E2E724CEE834FBEA9F1 /* SailingModeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1996D9810D46E7243686C07 /* SailingModeEngine.swift */; };
+		BFBB8EF1E8483B149944D8F3 /* SailingModeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1996D9810D46E7243686C07 /* SailingModeEngine.swift */; };
+		0FDF4604CD619B3A2F5FA715 /* BatterySailingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703766FAC7DA2222045ECEF /* BatterySailingCardView.swift */; };
+		8DC68FCE6E108E88B93D7D3E /* BatterySailingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703766FAC7DA2222045ECEF /* BatterySailingCardView.swift */; };
+		25B03278CC537A1FAB8B8ED1 /* SailingModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39E24C6EF3A0CFFC5D257B /* SailingModeTests.swift */; };
+		A9365A6F69AF802AD05B755D /* SailingModeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2620D96A09DC4C0944A9984 /* SailingModeModel.swift */; };
+		7D554F3CDB30DF77673525CE /* HysteresisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B2FA8EFCC38F288AC84B44 /* HysteresisController.swift */; };
+		AE0B2E6273B78DBDB7F0368B /* ChargeControlBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19651559D0A49DE2EDAD67B /* ChargeControlBackend.swift */; };
+		B7F9599266A0B24B0CCFE6DC /* SailingModeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1996D9810D46E7243686C07 /* SailingModeEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +204,12 @@
 		EF5E95657B03C7B09590F985 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		F5979431583BC9EB828F6744 /* ByteFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteFormatter.swift; sourceTree = "<group>"; };
 		FD967DEF7FBA0362E3640E08 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		A2620D96A09DC4C0944A9984 /* SailingModeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailingModeModel.swift; sourceTree = "<group>"; };
+		76B2FA8EFCC38F288AC84B44 /* HysteresisController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HysteresisController.swift; sourceTree = "<group>"; };
+		D19651559D0A49DE2EDAD67B /* ChargeControlBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeControlBackend.swift; sourceTree = "<group>"; };
+		F1996D9810D46E7243686C07 /* SailingModeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailingModeEngine.swift; sourceTree = "<group>"; };
+		F703766FAC7DA2222045ECEF /* BatterySailingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySailingCardView.swift; sourceTree = "<group>"; };
+		9A39E24C6EF3A0CFFC5D257B /* SailingModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailingModeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -205,6 +226,7 @@
 		21323ECB5D7C317B4DC0B33A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F703766FAC7DA2222045ECEF /* BatterySailingCardView.swift */,
 				2D8779D7B12A630F5DD67CDB /* BatteryCalibrationCardView.swift */,
 				44DF6E8CA5693837008924AE /* BatteryExpandedCardView.swift */,
 				9D28DD95AD96285071F0F2E1 /* CalibrationBatteryIconView.swift */,
@@ -222,6 +244,7 @@
 		24285CF14E4162CD0BB59B14 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9A39E24C6EF3A0CFFC5D257B /* SailingModeTests.swift */,
 				0528DC0BCDFC7CF7ECB11EED /* CPUAndMemoryTests.swift */,
 				6760AC0EE4E507F43BF12F3A /* FanBatteryStatusTests.swift */,
 				EF5E95657B03C7B09590F985 /* Mocks.swift */,
@@ -234,6 +257,9 @@
 		3A0289643319446878404B14 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				76B2FA8EFCC38F288AC84B44 /* HysteresisController.swift */,
+				D19651559D0A49DE2EDAD67B /* ChargeControlBackend.swift */,
+				F1996D9810D46E7243686C07 /* SailingModeEngine.swift */,
 				C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */,
 				708D7A9F13F7E9CF7101CB7B /* BatteryService.swift */,
 				320505BC57C9681AD5792F6E /* CPUService.swift */,
@@ -252,6 +278,7 @@
 		3BDC61EB27EC7C1FA2AEC275 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A2620D96A09DC4C0944A9984 /* SailingModeModel.swift */,
 				AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */,
 				EEF8CC791C4DD61A0515627A /* HardwareInfo.swift */,
 				677713A247A784A2DBF50B17 /* SensorValue.swift */,
@@ -466,6 +493,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9365A6F69AF802AD05B755D /* SailingModeModel.swift in Sources */,
+				7D554F3CDB30DF77673525CE /* HysteresisController.swift in Sources */,
+				AE0B2E6273B78DBDB7F0368B /* ChargeControlBackend.swift in Sources */,
+				B7F9599266A0B24B0CCFE6DC /* SailingModeEngine.swift in Sources */,
+				25B03278CC537A1FAB8B8ED1 /* SailingModeTests.swift in Sources */,
 				FE4CA5C2E606B4D70FF6B196 /* BatteryCalibrationEngine.swift in Sources */,
 				FF32BE67A493377EC3C2E8A8 /* BatteryCalibrationModel.swift in Sources */,
 				1C350BA5B886F576646B5491 /* BatteryService.swift in Sources */,
@@ -500,6 +532,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B527A1F477EF71D80924FE /* SailingModeModel.swift in Sources */,
+				428EA2FE54D4C822A104898C /* HysteresisController.swift in Sources */,
+				27FE72051E3A4D41D9F56242 /* ChargeControlBackend.swift in Sources */,
+				33093E2E724CEE834FBEA9F1 /* SailingModeEngine.swift in Sources */,
+				0FDF4604CD619B3A2F5FA715 /* BatterySailingCardView.swift in Sources */,
 				D0A3B71D7D6319343E93DF56 /* AppModel.swift in Sources */,
 				7F38827E871EDEAA56E761BD /* BatteryCalibrationCardView.swift in Sources */,
 				40157CBB84343D26734FE376 /* BatteryCalibrationEngine.swift in Sources */,
@@ -544,6 +581,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA6BEE10C8D37B3A7F848D80 /* SailingModeModel.swift in Sources */,
+				41FBCAF3FDCB0D786BFD6AB1 /* HysteresisController.swift in Sources */,
+				859F1810A4A12CDB0AA87753 /* ChargeControlBackend.swift in Sources */,
+				BFBB8EF1E8483B149944D8F3 /* SailingModeEngine.swift in Sources */,
+				8DC68FCE6E108E88B93D7D3E /* BatterySailingCardView.swift in Sources */,
 				084BE3AB9E6FCB32A0E1E521 /* BatteryCalibrationCardView.swift in Sources */,
 				18F7CE00C3C6EC8D4929B348 /* BatteryCalibrationEngine.swift in Sources */,
 				3FC1C1837ED5AF2BDE52AF20 /* BatteryCalibrationModel.swift in Sources */,

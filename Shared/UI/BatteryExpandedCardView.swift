@@ -10,6 +10,7 @@ struct BatteryExpandedCardView: View {
 
     enum BatterySection: String, CaseIterable {
         case powerFlow = "Power Flow"
+        case sailing = "Sailing"
         case calibration = "Calibration"
     }
 
@@ -46,9 +47,10 @@ struct BatteryExpandedCardView: View {
                 UsageBar(fraction: pct / 100.0, height: 4)
             }
 
-            // Sub-sections: Power Flow & Adapter Specs OR Calibration Mode
+            // Sub-sections: Power Flow & Adapter Specs, Sailing Mode, OR Calibration Mode
             Group {
-                if selectedSection == .powerFlow {
+                switch selectedSection {
+                case .powerFlow:
                     HStack(alignment: .top, spacing: 14) {
                         PowerFlowView(flow: metrics.battery.flow)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -64,7 +66,13 @@ struct BatteryExpandedCardView: View {
                             .frame(maxHeight: .infinity, alignment: .topLeading)
                     }
                     .padding(.top, 2)
-                } else {
+                case .sailing:
+                    BatterySailingCardView(
+                        engine: SailingModeEngine.shared,
+                        currentBatteryPercent: metrics.battery.percent.value ?? 100.0
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                case .calibration:
                     BatteryCalibrationCardView(
                         engine: BatteryCalibrationEngine.shared,
                         currentBatteryPercent: metrics.battery.percent.value ?? 100.0
@@ -87,7 +95,8 @@ struct BatteryExpandedCardView: View {
     private var sectionSwitcher: some View {
         HStack(spacing: 2) {
             sectionButton(title: "Flow", icon: "bolt.fill", section: .powerFlow)
-            sectionButton(title: "Calibration", icon: "slider.horizontal.3", section: .calibration)
+            sectionButton(title: "Sailing", icon: "sailboat.fill", section: .sailing)
+            sectionButton(title: "Calibrate", icon: "slider.horizontal.3", section: .calibration)
         }
         .padding(2)
         .background(
@@ -108,7 +117,12 @@ struct BatteryExpandedCardView: View {
                 Text(title)
                     .font(.system(size: 9.5, weight: selectedSection == section ? .bold : .medium))
 
-                if section == .calibration && BatteryCalibrationEngine.shared.state.isActive {
+                if section == .sailing && SailingModeEngine.shared.isEnabled {
+                    Circle()
+                        .fill(Color.cyan)
+                        .frame(width: 4.5, height: 4.5)
+                        .shadow(color: Color.cyan, radius: 2)
+                } else if section == .calibration && BatteryCalibrationEngine.shared.state.isActive {
                     Circle()
                         .fill(MonitorTheme.accentGreen)
                         .frame(width: 4.5, height: 4.5)

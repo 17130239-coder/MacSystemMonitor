@@ -27,6 +27,7 @@ final class AppModel {
             publisher.publish(metrics)
             if let pct = metrics.battery.percent.value {
                 BatteryCalibrationEngine.shared.update(currentPercent: pct, isConnected: metrics.battery.flow.isConnected)
+                SailingModeEngine.shared.update(currentBatteryPercent: pct, isPluggedIn: metrics.battery.flow.isConnected)
             }
         }
         applyInterval()
