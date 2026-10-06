@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Renders the complete Sailing Mode interface featuring the Hysteresis Band controller,
-/// hardware capability telemetry, and zero-risk interactive simulation.
+/// Renders the streamlined Sailing Mode interface featuring the Hysteresis Band controller,
+/// uncluttered controls, and direct status indicators.
 struct BatterySailingCardView: View {
     @Bindable var engine: SailingModeEngine = SailingModeEngine.shared
     var currentBatteryPercent: Double = 100.0
@@ -10,7 +10,7 @@ struct BatterySailingCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            // Header Bar matching AlDente & user screenshot
+            // Header Bar
             headerBar
 
             // Main Content: Deactivated Capsule OR Active Hysteresis Controller View
@@ -34,11 +34,7 @@ struct BatterySailingCardView: View {
     // MARK: - Header Bar
 
     private var headerBar: some View {
-        HStack(alignment: .center, spacing: 8) {
-            Image(systemName: "sailboat.fill")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(engine.isEnabled ? Color.cyan : MonitorTheme.primaryText)
-
+        HStack(alignment: .center, spacing: 6) {
             Text("Sailing Mode")
                 .font(.system(size: 13, weight: .bold))
                 .foregroundStyle(MonitorTheme.primaryText)
@@ -58,30 +54,9 @@ struct BatterySailingCardView: View {
 
             Spacer()
 
-            // Hardware Capability Pill
-            capabilityPill
-
             // Toggle Button
             actionButton
         }
-    }
-
-    private var capabilityPill: some View {
-        HStack(spacing: 4) {
-            Circle()
-                .fill(engine.capabilities.canInhibitCharge ? Color.green : Color.orange)
-                .frame(width: 5, height: 5)
-
-            Text(engine.capabilities.activeKeySet.displayName)
-                .font(.system(size: 9.5, weight: .medium, design: .monospaced))
-                .foregroundStyle(MonitorTheme.secondaryText)
-        }
-        .padding(.horizontal, 7)
-        .padding(.vertical, 3.5)
-        .background(
-            Capsule()
-                .fill(Color(white: 0.12))
-        )
     }
 
     private var actionButton: some View {
@@ -115,7 +90,7 @@ struct BatterySailingCardView: View {
         .buttonStyle(.plain)
     }
 
-    // MARK: - Deactivated State (Exact match to uploaded screenshot)
+    // MARK: - Deactivated State (Matches mockup)
 
     private var deactivatedView: some View {
         VStack(spacing: 8) {
@@ -154,33 +129,28 @@ struct BatterySailingCardView: View {
     // MARK: - Active Hysteresis Controller View
 
     private var activeHysteresisView: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             // Visual Hysteresis Band Gauge
             hysteresisGauge
 
-            // Controls: Upper Limit, Lower Limit & Strategy
-            HStack(spacing: 12) {
-                // Limit controls
+            // Controls: Lower Limit, Upper Limit & Strategy
+            HStack(spacing: 16) {
                 thresholdControls
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Divider()
-                    .frame(height: 38)
+                    .frame(height: 34)
                     .overlay(Color.white.opacity(0.08))
 
-                // Strategy selector
                 strategySelector
                     .frame(width: 170)
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 7)
+            .padding(.vertical, 8)
             .background(
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(Color(white: 0.11))
             )
-
-            // Simulator Bar / Status Note
-            simulatorRow
         }
     }
 
@@ -190,25 +160,32 @@ struct BatterySailingCardView: View {
         engine.isSimulating ? engine.simulatedSOC : currentBatteryPercent
     }
 
+    private var phaseStatusText: String {
+        switch engine.currentPhase {
+        case .chargingUp:
+            return "Charging to \(Int(engine.upperLimit))%"
+        case .sailing:
+            return "Sailing (\(Int(engine.lowerLimit))% – \(Int(engine.upperLimit))%)"
+        case .holding:
+            return "Holding at \(Int(engine.upperLimit))%"
+        case .inactive:
+            return "Inactive"
+        }
+    }
+
     private var hysteresisGauge: some View {
         VStack(spacing: 6) {
-            // Phase indicator badge
+            // Status bar
             HStack {
-                HStack(spacing: 5) {
-                    Image(systemName: phaseIcon)
-                        .font(.system(size: 10, weight: .bold))
-                        .foregroundStyle(phaseColor)
-
-                    Text(engine.currentPhase.rawValue)
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(MonitorTheme.primaryText)
-                }
+                Text(phaseStatusText)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(phaseColor)
 
                 Spacer()
 
-                Text("Intent: \(engine.currentIntent.rawValue)")
+                Text("Band: -\(Int(engine.upperLimit - engine.lowerLimit))%")
                     .font(.system(size: 10, weight: .medium, design: .monospaced))
-                    .foregroundStyle(phaseColor)
+                    .foregroundStyle(MonitorTheme.secondaryText)
             }
 
             // Interactive track
@@ -222,12 +199,12 @@ struct BatterySailingCardView: View {
                     // Track background
                     Capsule()
                         .fill(Color.white.opacity(0.08))
-                        .frame(height: 10)
+                        .frame(height: 8)
 
                     // Hysteresis Band highlight
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 4)
                         .fill(Color.cyan.opacity(0.22))
-                        .frame(width: max(0, upperX - lowerX), height: 10)
+                        .frame(width: max(0, upperX - lowerX), height: 8)
                         .offset(x: lowerX)
 
                     // Current Battery Level fill
@@ -239,38 +216,32 @@ struct BatterySailingCardView: View {
                                 endPoint: .trailing
                             )
                         )
-                        .frame(width: currentX, height: 10)
+                        .frame(width: currentX, height: 8)
 
                     // Marker for Lower Limit
                     Rectangle()
                         .fill(Color.white.opacity(0.6))
-                        .frame(width: 2, height: 16)
+                        .frame(width: 2, height: 14)
                         .offset(x: max(0, lowerX - 1))
 
                     // Marker for Upper Limit
                     Rectangle()
                         .fill(Color.white.opacity(0.9))
-                        .frame(width: 2, height: 16)
+                        .frame(width: 2, height: 14)
                         .offset(x: min(width - 2, upperX - 1))
                 }
             }
-            .frame(height: 16)
+            .frame(height: 14)
 
             // Labels under track
             HStack {
-                Text("\(Int(engine.lowerLimit))% (Lower)")
+                Text("\(Int(engine.lowerLimit))%")
                     .font(.system(size: 9.5, weight: .medium, design: .monospaced))
                     .foregroundStyle(MonitorTheme.secondaryText)
 
                 Spacer()
 
-                Text("Current: \(Int(displaySOC))%")
-                    .font(.system(size: 10, weight: .bold, design: .rounded))
-                    .foregroundStyle(phaseColor)
-
-                Spacer()
-
-                Text("\(Int(engine.upperLimit))% (Upper)")
+                Text("\(Int(engine.upperLimit))%")
                     .font(.system(size: 9.5, weight: .medium, design: .monospaced))
                     .foregroundStyle(MonitorTheme.secondaryText)
             }
@@ -287,15 +258,6 @@ struct BatterySailingCardView: View {
         )
     }
 
-    private var phaseIcon: String {
-        switch engine.currentPhase {
-        case .chargingUp: return "bolt.fill"
-        case .sailing: return "sailboat.fill"
-        case .holding: return "pause.fill"
-        case .inactive: return "moon.fill"
-        }
-    }
-
     private var phaseColor: Color {
         switch engine.currentPhase {
         case .chargingUp: return Color.green
@@ -308,25 +270,9 @@ struct BatterySailingCardView: View {
     // MARK: - Threshold Controls
 
     private var thresholdControls: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("UPPER LIMIT")
-                    .font(.system(size: 8.5, weight: .bold))
-                    .foregroundStyle(MonitorTheme.secondaryText)
-
-                HStack(spacing: 4) {
-                    Text("\(Int(engine.upperLimit))%")
-                        .font(.system(size: 13, weight: .bold, design: .rounded))
-                        .foregroundStyle(MonitorTheme.primaryText)
-
-                    Stepper("", value: $engine.upperLimit, in: 60...95, step: 5)
-                        .labelsHidden()
-                        .scaleEffect(0.7)
-                }
-            }
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text("LOWER LIMIT")
+                Text("LOWER")
                     .font(.system(size: 8.5, weight: .bold))
                     .foregroundStyle(MonitorTheme.secondaryText)
 
@@ -341,72 +287,44 @@ struct BatterySailingCardView: View {
                 }
             }
 
-            Text("Band: -\(Int(engine.upperLimit - engine.lowerLimit))%")
-                .font(.system(size: 9.5, weight: .medium, design: .monospaced))
-                .foregroundStyle(Color.cyan)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 3)
-                .background(Capsule().fill(Color.cyan.opacity(0.12)))
+            VStack(alignment: .leading, spacing: 2) {
+                Text("UPPER")
+                    .font(.system(size: 8.5, weight: .bold))
+                    .foregroundStyle(MonitorTheme.secondaryText)
+
+                HStack(spacing: 4) {
+                    Text("\(Int(engine.upperLimit))%")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .foregroundStyle(MonitorTheme.primaryText)
+
+                    Stepper("", value: $engine.upperLimit, in: 60...95, step: 5)
+                        .labelsHidden()
+                        .scaleEffect(0.7)
+                }
+            }
         }
     }
 
     // MARK: - Strategy Selector
 
     private var strategySelector: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 3) {
             Text("STRATEGY")
                 .font(.system(size: 8.5, weight: .bold))
                 .foregroundStyle(MonitorTheme.secondaryText)
 
             Picker("", selection: $engine.strategy) {
-                Text("🍃 Passive").tag(SailingStrategy.passive)
-                Text("⚡️ Active").tag(SailingStrategy.activeDischarge)
+                Text("Passive").tag(SailingStrategy.passive)
+                Text("Active").tag(SailingStrategy.activeDischarge)
             }
             .pickerStyle(.segmented)
             .labelsHidden()
 
-            Text(engine.strategy == .passive ? "0% extra cycle wear" : "~10% cycle throughput / loop")
+            Text(engine.strategy == .passive ? "0% cycle wear" : "~10% cycle wear / loop")
                 .font(.system(size: 8.5))
                 .foregroundStyle(engine.strategy == .passive ? Color.green : Color.orange)
                 .lineLimit(1)
         }
-    }
-
-    // MARK: - Simulator Row
-
-    private var simulatorRow: some View {
-        HStack(spacing: 8) {
-            Toggle(isOn: $engine.isSimulating) {
-                HStack(spacing: 4) {
-                    Image(systemName: "flask.fill")
-                        .font(.system(size: 9))
-                    Text("Simulator")
-                        .font(.system(size: 9.5, weight: .semibold))
-                }
-                .foregroundStyle(engine.isSimulating ? Color.cyan : MonitorTheme.secondaryText)
-            }
-            .toggleStyle(.button)
-            .buttonStyle(.plain)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 2.5)
-            .background(Capsule().fill(Color(white: 0.13)))
-
-            if engine.isSimulating {
-                Slider(value: $engine.simulatedSOC, in: 60...100, step: 1)
-                    .tint(.cyan)
-
-                Text("\(Int(engine.simulatedSOC))%")
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    .foregroundStyle(Color.cyan)
-                    .frame(width: 32)
-            } else {
-                Text(engine.strategy.tradeOffSummary)
-                    .font(.system(size: 9.5))
-                    .foregroundStyle(MonitorTheme.tertiaryText)
-                    .lineLimit(1)
-            }
-        }
-        .padding(.horizontal, 4)
     }
 
     // MARK: - Help Popover

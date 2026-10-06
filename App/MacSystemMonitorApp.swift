@@ -9,7 +9,7 @@ struct MacSystemMonitorApp: App {
         Window("Mac Monitor", id: "main") {
             MainView(monitor: AppModel.shared.monitor)
         }
-        .defaultSize(width: 795, height: 440)
+        .defaultSize(width: 820, height: 460)
         .windowResizability(.contentMinSize)
 
         Window("Sensor Report", id: "report") {
@@ -79,6 +79,6 @@ struct MainView: View {
 #if DEBUG
 #Preview("Main window") {
     MainView(monitor: SystemMonitor())
-        .frame(width: 795, height: 440)
+        .frame(width: 820, height: 460)
 }
 #endif

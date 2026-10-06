@@ -32,11 +32,7 @@ struct BatteryCalibrationCardView: View {
     // MARK: - Header Bar
 
     private var headerBar: some View {
-        HStack(alignment: .center, spacing: 8) {
-            Image(systemName: "slider.horizontal.3")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(MonitorTheme.primaryText)
-
+        HStack(alignment: .center, spacing: 6) {
             Text("Calibration Mode")
                 .font(.system(size: 13, weight: .bold))
                 .foregroundStyle(MonitorTheme.primaryText)
