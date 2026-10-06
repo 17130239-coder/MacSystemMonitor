@@ -9,14 +9,18 @@
 /* Begin PBXBuildFile section */
 		020068FB5F1FE34E07C21475 /* GPUService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED95CEE8D2D3EDD1E84FBE1 /* GPUService.swift */; };
 		03807FEC8B0F579E9BADD973 /* PowerFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5478BDA11EBCE501EB233A8D /* PowerFlowView.swift */; };
+		05F210FA69F026E8DFCF0176 /* CalibrationBatteryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D28DD95AD96285071F0F2E1 /* CalibrationBatteryIconView.swift */; };
+		062BF445F6493656D0A23B5C /* CalibrationBatteryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D28DD95AD96285071F0F2E1 /* CalibrationBatteryIconView.swift */; };
 		0636F9B82FA1F78206861CC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8205276EE7278CABF07FB7E /* Assets.xcassets */; };
 		07D4C4EDE41F63047CB07247 /* CPUService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320505BC57C9681AD5792F6E /* CPUService.swift */; };
+		084BE3AB9E6FCB32A0E1E521 /* BatteryCalibrationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8779D7B12A630F5DD67CDB /* BatteryCalibrationCardView.swift */; };
 		0BC77160CBA7F8126999F21D /* TemperatureProbes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAC0BB9113875916A60D9A /* TemperatureProbes.swift */; };
 		0DF74BFCC12999AD2F41C13F /* UsageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C5F7AA1E36BC4576E7FA4B /* UsageBar.swift */; };
 		0E7B719160F76C1C6FAFF743 /* SystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D883300D9FB55CAD8BD9C5 /* SystemStatus.swift */; };
 		0F01D232A967FFB28806AAEE /* PowerAdapterSpecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93484D9EC0577B2179F4399 /* PowerAdapterSpecsView.swift */; };
 		10A681DC67CC69DC55FFD2BD /* TemperatureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553486E344893CF4F273FB7C /* TemperatureService.swift */; };
 		135911BC0B16D1755B93FFB2 /* MonitorWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD56B1CCF0B16EDCCA61E26 /* MonitorWidgetView.swift */; };
+		18F7CE00C3C6EC8D4929B348 /* BatteryCalibrationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */; };
 		19A53F3507AE80A16134DCD7 /* TemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12750A09BF536662F8C6C4D /* TemperatureFormatter.swift */; };
 		1C350BA5B886F576646B5491 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D7A9F13F7E9CF7101CB7B /* BatteryService.swift */; };
 		226B363CE60DCA732C3BAE47 /* PowerAdapterSpecsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93484D9EC0577B2179F4399 /* PowerAdapterSpecsView.swift */; };
@@ -32,6 +36,8 @@
 		3C66127FCF8A7D37B1CB4F02 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5E95657B03C7B09590F985 /* Mocks.swift */; };
 		3C9D3A2B2B04BC5A9C2BC294 /* MonitorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1281066032DD492DD516969F /* MonitorTheme.swift */; };
 		3F1006927F6717F7EDFD4D4A /* HardwareInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A2E92C9AF3B8964CDBD6FD /* HardwareInfoService.swift */; };
+		3FC1C1837ED5AF2BDE52AF20 /* BatteryCalibrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */; };
+		40157CBB84343D26734FE376 /* BatteryCalibrationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */; };
 		4040906F32B4601D95197CAB /* SMCConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B4AC65E88571106C0F0E63 /* SMCConnection.swift */; };
 		416D59520DDB3E295F6650AD /* SystemMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74B4CD3745E8070E1E4D5E /* SystemMetrics.swift */; };
 		46E2C48F1DE1AE59EBF4357B /* TemperatureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553486E344893CF4F273FB7C /* TemperatureService.swift */; };
@@ -49,9 +55,11 @@
 		68E5167D9CC9F1CA8B382ED8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66423EB2CCCBB266F5C54E /* HeaderView.swift */; };
 		6FFDE6507B3CF491CB6202BD /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9124A697635914766F1CE9 /* SnapshotStore.swift */; };
 		71077E26559E160C350626FE /* SystemMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10810A499404EC10758AFDCA /* SystemMonitor.swift */; };
+		71211A0EA5CA40BC536711F1 /* BatteryCalibrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */; };
 		73C450B2ABEF2C3A7E432B3D /* SensorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677713A247A784A2DBF50B17 /* SensorValue.swift */; };
 		75184CC92C5C4FC6B8BC87BE /* UsageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C5F7AA1E36BC4576E7FA4B /* UsageBar.swift */; };
 		7AF14CDB1E207AE12C6087A9 /* PreviewMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E5EC6BE1CFB20E9F4DE92C /* PreviewMetrics.swift */; };
+		7F38827E871EDEAA56E761BD /* BatteryCalibrationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8779D7B12A630F5DD67CDB /* BatteryCalibrationCardView.swift */; };
 		84561286B4EA79BBDF6F1E0A /* SMCConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B4AC65E88571106C0F0E63 /* SMCConnection.swift */; };
 		847512AB5C8EE8CE2946F2CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E48F58AD99D493F56F1D1B7 /* Assets.xcassets */; };
 		88740A422743FAAB503B7917 /* SensorDiscoveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D750F771312587EEC85DF2 /* SensorDiscoveryService.swift */; };
@@ -98,7 +106,9 @@
 		F57ABB1362FF41C906D69CC2 /* SystemMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74B4CD3745E8070E1E4D5E /* SystemMetrics.swift */; };
 		F8BC875FBBC5DC63E48AA000 /* TemperatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB229E83E37218036E3F2C15 /* TemperatureTests.swift */; };
 		FCCE673740E233EB8B6AABA9 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DECE055EB115AB109C8F5C51 /* AppIcon.icns */; };
+		FE4CA5C2E606B4D70FF6B196 /* BatteryCalibrationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */; };
 		FEE54D88CC63B729743DE411 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D7A9F13F7E9CF7101CB7B /* BatteryService.swift */; };
+		FF32BE67A493377EC3C2E8A8 /* BatteryCalibrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +145,7 @@
 		1281066032DD492DD516969F /* MonitorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorTheme.swift; sourceTree = "<group>"; };
 		17443CE7180E417DA0A20DAA /* SensorReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorReportView.swift; sourceTree = "<group>"; };
 		252786120A9C37000226B92D /* MetricCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCard.swift; sourceTree = "<group>"; };
+		2D8779D7B12A630F5DD67CDB /* BatteryCalibrationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCalibrationCardView.swift; sourceTree = "<group>"; };
 		2E152A7DAC3AA8FBC5ADE6B0 /* FanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanService.swift; sourceTree = "<group>"; };
 		320505BC57C9681AD5792F6E /* CPUService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUService.swift; sourceTree = "<group>"; };
 		3302A3704194CABCAC0659A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -156,12 +167,15 @@
 		81D883300D9FB55CAD8BD9C5 /* SystemStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatus.swift; sourceTree = "<group>"; };
 		86D750F771312587EEC85DF2 /* SensorDiscoveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorDiscoveryService.swift; sourceTree = "<group>"; };
 		8BD56B1CCF0B16EDCCA61E26 /* MonitorWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorWidgetView.swift; sourceTree = "<group>"; };
+		9D28DD95AD96285071F0F2E1 /* CalibrationBatteryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationBatteryIconView.swift; sourceTree = "<group>"; };
 		A12750A09BF536662F8C6C4D /* TemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatter.swift; sourceTree = "<group>"; };
 		AD66423EB2CCCBB266F5C54E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		ADF105AE72880452162C079B /* MacSystemMonitorWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacSystemMonitorWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCalibrationModel.swift; sourceTree = "<group>"; };
 		AED95CEE8D2D3EDD1E84FBE1 /* GPUService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUService.swift; sourceTree = "<group>"; };
 		B7A2E92C9AF3B8964CDBD6FD /* HardwareInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareInfoService.swift; sourceTree = "<group>"; };
 		B8205276EE7278CABF07FB7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryCalibrationEngine.swift; sourceTree = "<group>"; };
 		CD8D2F0BB59AC15692CFD53E /* MacSystemMonitorWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacSystemMonitorWidget.entitlements; sourceTree = "<group>"; };
 		D1B4AC65E88571106C0F0E63 /* SMCConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMCConnection.swift; sourceTree = "<group>"; };
 		D93484D9EC0577B2179F4399 /* PowerAdapterSpecsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerAdapterSpecsView.swift; sourceTree = "<group>"; };
@@ -191,7 +205,9 @@
 		21323ECB5D7C317B4DC0B33A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2D8779D7B12A630F5DD67CDB /* BatteryCalibrationCardView.swift */,
 				44DF6E8CA5693837008924AE /* BatteryExpandedCardView.swift */,
+				9D28DD95AD96285071F0F2E1 /* CalibrationBatteryIconView.swift */,
 				AD66423EB2CCCBB266F5C54E /* HeaderView.swift */,
 				252786120A9C37000226B92D /* MetricCard.swift */,
 				1281066032DD492DD516969F /* MonitorTheme.swift */,
@@ -218,6 +234,7 @@
 		3A0289643319446878404B14 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C20086C268FB012F20A33417 /* BatteryCalibrationEngine.swift */,
 				708D7A9F13F7E9CF7101CB7B /* BatteryService.swift */,
 				320505BC57C9681AD5792F6E /* CPUService.swift */,
 				2E152A7DAC3AA8FBC5ADE6B0 /* FanService.swift */,
@@ -235,6 +252,7 @@
 		3BDC61EB27EC7C1FA2AEC275 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AE606199B6EF90D2E78FBA4D /* BatteryCalibrationModel.swift */,
 				EEF8CC791C4DD61A0515627A /* HardwareInfo.swift */,
 				677713A247A784A2DBF50B17 /* SensorValue.swift */,
 				6A74B4CD3745E8070E1E4D5E /* SystemMetrics.swift */,
@@ -448,6 +466,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE4CA5C2E606B4D70FF6B196 /* BatteryCalibrationEngine.swift in Sources */,
+				FF32BE67A493377EC3C2E8A8 /* BatteryCalibrationModel.swift in Sources */,
 				1C350BA5B886F576646B5491 /* BatteryService.swift in Sources */,
 				30C7F98DE1D9695CB4A28ABF /* ByteFormatter.swift in Sources */,
 				A32D59612ECAC7DE58A7D0AF /* CPUAndMemoryTests.swift in Sources */,
@@ -481,10 +501,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A3B71D7D6319343E93DF56 /* AppModel.swift in Sources */,
+				7F38827E871EDEAA56E761BD /* BatteryCalibrationCardView.swift in Sources */,
+				40157CBB84343D26734FE376 /* BatteryCalibrationEngine.swift in Sources */,
+				71211A0EA5CA40BC536711F1 /* BatteryCalibrationModel.swift in Sources */,
 				BBD7A83D436F1CBECC700A58 /* BatteryExpandedCardView.swift in Sources */,
 				FEE54D88CC63B729743DE411 /* BatteryService.swift in Sources */,
 				53516046CEA2B3E9EDD470AA /* ByteFormatter.swift in Sources */,
 				BB4BB44F755C4D660899ED27 /* CPUService.swift in Sources */,
+				05F210FA69F026E8DFCF0176 /* CalibrationBatteryIconView.swift in Sources */,
 				645606D678E73963BAEAAF21 /* FanService.swift in Sources */,
 				ABFDBB16FF5F5773F6E11056 /* GPUService.swift in Sources */,
 				A5881C7BF379DEE1F685A0D5 /* HardwareInfo.swift in Sources */,
@@ -520,10 +544,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				084BE3AB9E6FCB32A0E1E521 /* BatteryCalibrationCardView.swift in Sources */,
+				18F7CE00C3C6EC8D4929B348 /* BatteryCalibrationEngine.swift in Sources */,
+				3FC1C1837ED5AF2BDE52AF20 /* BatteryCalibrationModel.swift in Sources */,
 				EB6696ACD8AE2A192A04CD78 /* BatteryExpandedCardView.swift in Sources */,
 				C14C09B8CDB13F1E7BFD8B86 /* BatteryService.swift in Sources */,
 				35C351EE7ADE5B1B2EED19FB /* ByteFormatter.swift in Sources */,
 				07D4C4EDE41F63047CB07247 /* CPUService.swift in Sources */,
+				062BF445F6493656D0A23B5C /* CalibrationBatteryIconView.swift in Sources */,
 				5D8D5DA8CC89F77AEDD0C5B7 /* FanService.swift in Sources */,
 				020068FB5F1FE34E07C21475 /* GPUService.swift in Sources */,
 				C226EA9A3CC5F641140EE04F /* HardwareInfo.swift in Sources */,

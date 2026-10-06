@@ -191,3 +191,47 @@ final class StatusTests: XCTestCase {
         XCTAssertEqual(SystemStatus.hot.label, "Hot")
     }
 }
+
+@MainActor
+final class BatteryCalibrationTests: XCTestCase {
+    func testCalibrationStepProperties() {
+        XCTAssertEqual(CalibrationStep.allCases.count, 5)
+        XCTAssertEqual(CalibrationStep.chargeTo100.title, "Charge to 100%")
+        XCTAssertEqual(CalibrationStep.dischargeTo10.title, "Discharge to 10%")
+        XCTAssertEqual(CalibrationStep.chargeTo100Final.title, "Charge to 100%")
+        XCTAssertEqual(CalibrationStep.holdFor.title, "Hold for")
+        XCTAssertEqual(CalibrationStep.dischargeTo80.title, "Discharge to 80%")
+
+        XCTAssertEqual(CalibrationStep.chargeTo100.targetPercent, 100.0)
+        XCTAssertEqual(CalibrationStep.dischargeTo10.targetPercent, 10.0)
+        XCTAssertEqual(CalibrationStep.dischargeTo80.targetPercent, 80.0)
+    }
+
+    func testCalibrationLifecycleTransitions() {
+        let engine = BatteryCalibrationEngine.shared
+        engine.cancel()
+        XCTAssertEqual(engine.state, .idle)
+        XCTAssertFalse(engine.state.isActive)
+
+        // 1. Start -> Step 1
+        engine.start()
+        XCTAssertTrue(engine.state.isActive)
+        XCTAssertEqual(engine.state.currentStep, .chargeTo100)
+
+        // 2. Battery hits 100% -> advances to Step 2 (Discharge to 10%)
+        engine.update(currentPercent: 100.0, isConnected: true)
+        XCTAssertEqual(engine.state.currentStep, .dischargeTo10)
+
+        // 3. Battery drops to 10% -> advances to Step 3 (Charge to 100%)
+        engine.update(currentPercent: 10.0, isConnected: false)
+        XCTAssertEqual(engine.state.currentStep, .chargeTo100Final)
+
+        // 4. Battery hits 100% -> advances to Step 4 (Hold for)
+        engine.update(currentPercent: 100.0, isConnected: true)
+        XCTAssertEqual(engine.state.currentStep, .holdFor)
+
+        // 5. Cancel returns to idle
+        engine.cancel()
+        XCTAssertEqual(engine.state, .idle)
+    }
+}

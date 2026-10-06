@@ -23,7 +23,12 @@ final class AppModel {
     }
 
     func start() {
-        monitor.onSample = { [publisher] metrics in publisher.publish(metrics) }
+        monitor.onSample = { [publisher] metrics in
+            publisher.publish(metrics)
+            if let pct = metrics.battery.percent.value {
+                BatteryCalibrationEngine.shared.update(currentPercent: pct, isConnected: metrics.battery.flow.isConnected)
+            }
+        }
         applyInterval()
         monitor.start()
         NotificationCenter.default.addObserver(
