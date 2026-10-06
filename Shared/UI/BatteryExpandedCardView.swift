@@ -119,9 +119,9 @@ struct BatteryExpandedCardView: View {
 
                 if section == .sailing && SailingModeEngine.shared.isEnabled {
                     Circle()
-                        .fill(Color.cyan)
+                        .fill(MonitorTheme.accent)
                         .frame(width: 4.5, height: 4.5)
-                        .shadow(color: Color.cyan, radius: 2)
+                        .shadow(color: MonitorTheme.accent, radius: 2)
                 } else if section == .calibration && BatteryCalibrationEngine.shared.state.isActive {
                     Circle()
                         .fill(MonitorTheme.accentGreen)

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Renders the streamlined Sailing Mode interface featuring the Hysteresis Band controller,
-/// uncluttered controls, and direct status indicators.
+/// Renders the streamlined Sailing Mode interface with a progress bar / slider
+/// that is 100% consistent with the system battery bar and UsageBar styling.
 struct BatterySailingCardView: View {
     @Bindable var engine: SailingModeEngine = SailingModeEngine.shared
     var currentBatteryPercent: Double = 100.0
@@ -9,7 +9,7 @@ struct BatterySailingCardView: View {
     @State private var showingHelpPopover: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             // Header Bar
             headerBar
 
@@ -77,11 +77,11 @@ struct BatterySailingCardView: View {
             .foregroundStyle(engine.isEnabled ? Color.white : MonitorTheme.secondaryText)
             .background(
                 Capsule()
-                    .fill(engine.isEnabled ? Color.cyan.opacity(0.3) : Color(white: 0.14))
+                    .fill(engine.isEnabled ? MonitorTheme.accent.opacity(0.22) : Color(white: 0.14))
                     .overlay(
                         Capsule()
                             .strokeBorder(
-                                engine.isEnabled ? Color.cyan.opacity(0.5) : Color.white.opacity(0.12),
+                                engine.isEnabled ? MonitorTheme.accent.opacity(0.45) : Color.white.opacity(0.12),
                                 lineWidth: 0.75
                             )
                     )
@@ -129,8 +129,8 @@ struct BatterySailingCardView: View {
     // MARK: - Active Hysteresis Controller View
 
     private var activeHysteresisView: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // Visual Hysteresis Band Gauge
+        VStack(alignment: .leading, spacing: 12) {
+            // Visual Slider / Progress Bar (Identical in style to Battery UsageBar)
             hysteresisGauge
 
             // Controls: Lower Limit, Upper Limit & Strategy
@@ -154,7 +154,7 @@ struct BatterySailingCardView: View {
         }
     }
 
-    // MARK: - Visual Gauge
+    // MARK: - Visual Slider / Progress Bar (Matching Battery UsageBar)
 
     private var displaySOC: Double {
         engine.isSimulating ? engine.simulatedSOC : currentBatteryPercent
@@ -179,7 +179,7 @@ struct BatterySailingCardView: View {
             HStack {
                 Text(phaseStatusText)
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(phaseColor)
+                    .foregroundStyle(MonitorTheme.accent)
 
                 Spacer()
 
@@ -188,52 +188,41 @@ struct BatterySailingCardView: View {
                     .foregroundStyle(MonitorTheme.secondaryText)
             }
 
-            // Interactive track
+            // Slider / Progress bar identical to UsageBar (height: 4, MonitorTheme.track, MonitorTheme.accent)
             GeometryReader { geo in
                 let width = geo.size.width
                 let lowerX = max(0, min(width, width * CGFloat(engine.lowerLimit / 100.0)))
                 let upperX = max(0, min(width, width * CGFloat(engine.upperLimit / 100.0)))
-                let currentX = max(0, min(width, width * CGFloat(displaySOC / 100.0)))
+                let fraction = (displaySOC / 100.0).clamped(to: 0...1)
+                let currentX = max(4, width * CGFloat(fraction))
 
                 ZStack(alignment: .leading) {
-                    // Track background
+                    // 1. Base track (Identical to UsageBar)
                     Capsule()
-                        .fill(Color.white.opacity(0.08))
-                        .frame(height: 8)
+                        .fill(MonitorTheme.track)
+                        .frame(height: 4)
 
-                    // Hysteresis Band highlight
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color.cyan.opacity(0.22))
-                        .frame(width: max(0, upperX - lowerX), height: 8)
+                    // 2. Sailing Hysteresis Band highlight on the track
+                    Capsule()
+                        .fill(MonitorTheme.accent.opacity(0.35))
+                        .frame(width: max(0, upperX - lowerX), height: 4)
                         .offset(x: lowerX)
 
-                    // Current Battery Level fill
+                    // 3. Current Level Fill (Identical to UsageBar)
                     Capsule()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.cyan.opacity(0.6), phaseColor],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .frame(width: currentX, height: 8)
+                        .fill(MonitorTheme.accent)
+                        .frame(width: currentX, height: 4)
 
-                    // Marker for Lower Limit
-                    Rectangle()
-                        .fill(Color.white.opacity(0.6))
-                        .frame(width: 2, height: 14)
-                        .offset(x: max(0, lowerX - 1))
-
-                    // Marker for Upper Limit
-                    Rectangle()
-                        .fill(Color.white.opacity(0.9))
-                        .frame(width: 2, height: 14)
-                        .offset(x: min(width - 2, upperX - 1))
+                    // 4. Subtle Upper Limit Stop Notch
+                    Capsule()
+                        .fill(Color.white.opacity(0.85))
+                        .frame(width: 1.5, height: 6)
+                        .offset(x: min(width - 1.5, upperX - 0.75))
                 }
             }
-            .frame(height: 14)
+            .frame(height: 6)
 
-            // Labels under track
+            // Labels under the slider track
             HStack {
                 Text("\(Int(engine.lowerLimit))%")
                     .font(.system(size: 9.5, weight: .medium, design: .monospaced))
@@ -245,25 +234,6 @@ struct BatterySailingCardView: View {
                     .font(.system(size: 9.5, weight: .medium, design: .monospaced))
                     .foregroundStyle(MonitorTheme.secondaryText)
             }
-        }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(Color(white: 0.11))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .strokeBorder(Color.white.opacity(0.06), lineWidth: 0.75)
-                )
-        )
-    }
-
-    private var phaseColor: Color {
-        switch engine.currentPhase {
-        case .chargingUp: return Color.green
-        case .sailing: return Color.cyan
-        case .holding: return Color.blue
-        case .inactive: return Color.gray
         }
     }
 
@@ -322,7 +292,7 @@ struct BatterySailingCardView: View {
 
             Text(engine.strategy == .passive ? "0% cycle wear" : "~10% cycle wear / loop")
                 .font(.system(size: 8.5))
-                .foregroundStyle(engine.strategy == .passive ? Color.green : Color.orange)
+                .foregroundStyle(engine.strategy == .passive ? MonitorTheme.accent : Color.orange)
                 .lineLimit(1)
         }
     }
@@ -333,7 +303,7 @@ struct BatterySailingCardView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 6) {
                 Image(systemName: "sailboat.fill")
-                    .foregroundStyle(Color.cyan)
+                    .foregroundStyle(MonitorTheme.accent)
                 Text("About Sailing Mode & Hysteresis")
                     .font(.system(size: 13, weight: .bold))
             }
@@ -349,7 +319,7 @@ struct BatterySailingCardView: View {
                     .font(.system(size: 11, weight: .bold))
 
                 bulletPoint("1. Upper Threshold (e.g. 80%)", "Charging is inhibited when reached, letting the system operate on external power.")
-                bulletPoint("2. Hysteresis Band (e.g. 75% - 80%)", "Prevents hunting/chattering. The system avoids rapid charge-on / charge-off cycles.")
+                bulletPoint("2. Hysteresis Band (e.g. 70% - 80%)", "Prevents hunting/chattering. The system avoids rapid charge-on / charge-off cycles.")
                 bulletPoint("3. Passive vs Active Trade-off", "Passive mode incurs zero extra cycle wear. Active discharge forces battery drop but adds ~10% cycle throughput per loop.")
                 bulletPoint("4. Dynamic Probing", "SMC keys (CHTE / CH0B) are queried dynamically at runtime to verify firmware capabilities safely.")
             }
@@ -363,7 +333,7 @@ struct BatterySailingCardView: View {
                 Spacer()
                 Text(engine.capabilities.activeKeySet.rawValue)
                     .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                    .foregroundStyle(Color.cyan)
+                    .foregroundStyle(MonitorTheme.accent)
             }
         }
         .padding(14)
@@ -379,5 +349,11 @@ struct BatterySailingCardView: View {
                 .font(.system(size: 10))
                 .foregroundStyle(MonitorTheme.secondaryText)
         }
+    }
+}
+
+private extension Double {
+    func clamped(to range: ClosedRange<Double>) -> Double {
+        min(max(self, range.lowerBound), range.upperBound)
     }
 }
