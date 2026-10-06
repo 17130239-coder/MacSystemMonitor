@@ -56,13 +56,6 @@ struct BatteryCalibrationCardView: View {
 
             Spacer()
 
-            // Lock indicator
-            Image(systemName: "lock.fill")
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(MonitorTheme.secondaryText)
-                .padding(.trailing, 2)
-                .help("Calibration requires charger interaction")
-
             // Start / Stop Calibration Button
             actionButton
         }
